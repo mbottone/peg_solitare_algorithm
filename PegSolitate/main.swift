@@ -14,7 +14,7 @@ func time <A> (@noescape f: () -> A) -> A
     let result = f()
     let timeElapsed = NSDate().timeIntervalSinceDate(startTime)
     
-    print("Time Elapsed - \(timeElapsed)")
+    print("Time Elapsed - \(timeElapsed) seconds")
     return result
 }
 
@@ -33,4 +33,4 @@ print("Generating graph...")
 
 let graph = time { BoardGraph(root: rootNode) }
 
-print("Graph Complete - \(graph.nodeCount) nodes.")
+print("Graph Complete - \(graph.nodeCount) nodes")
