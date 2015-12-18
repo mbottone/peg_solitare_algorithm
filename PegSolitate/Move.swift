@@ -76,4 +76,8 @@ struct Move
     var secondStep: Point {
         return firstStep.pointForDirection(direction)
     }
+    
+    var description: String {
+        return "\(secondStep.toString()) -> \(location.toString())"
+    }
 }

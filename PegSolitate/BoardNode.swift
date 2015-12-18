@@ -39,9 +39,7 @@ class BoardNode
         spaces.append(jumpPoint)
         spaces.append(oldPoint)
         
-        let moveDescription = "\(oldPoint.toString()) -> \(location.toString())"
-        
-        return BoardNode(board: newBoard, parent: self, moveString: moveDescription)
+        return BoardNode(board: newBoard, parent: self, moveString: move.description)
     }
     
     func generateMoves() -> [BoardNode]
