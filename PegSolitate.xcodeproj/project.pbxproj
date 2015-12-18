@@ -11,6 +11,7 @@
 		D31303AE1C2481C4004FF4CF /* BoardNode.swift in Sources */ = {isa = PBXBuildFile; fileRef = D31303AD1C2481C4004FF4CF /* BoardNode.swift */; settings = {ASSET_TAGS = (); }; };
 		D31303B01C24824B004FF4CF /* Board.swift in Sources */ = {isa = PBXBuildFile; fileRef = D31303AF1C24824B004FF4CF /* Board.swift */; settings = {ASSET_TAGS = (); }; };
 		D31303B21C248433004FF4CF /* Move.swift in Sources */ = {isa = PBXBuildFile; fileRef = D31303B11C248433004FF4CF /* Move.swift */; settings = {ASSET_TAGS = (); }; };
+		D31303B41C24AEDC004FF4CF /* BoardGraph.swift in Sources */ = {isa = PBXBuildFile; fileRef = D31303B31C24AEDC004FF4CF /* BoardGraph.swift */; settings = {ASSET_TAGS = (); }; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -31,6 +32,7 @@
 		D31303AD1C2481C4004FF4CF /* BoardNode.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BoardNode.swift; sourceTree = "<group>"; };
 		D31303AF1C24824B004FF4CF /* Board.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Board.swift; sourceTree = "<group>"; };
 		D31303B11C248433004FF4CF /* Move.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Move.swift; sourceTree = "<group>"; };
+		D31303B31C24AEDC004FF4CF /* BoardGraph.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BoardGraph.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -64,6 +66,7 @@
 			isa = PBXGroup;
 			children = (
 				D31303A61C1CDFDC004FF4CF /* main.swift */,
+				D31303B31C24AEDC004FF4CF /* BoardGraph.swift */,
 				D31303AD1C2481C4004FF4CF /* BoardNode.swift */,
 				D31303AF1C24824B004FF4CF /* Board.swift */,
 				D31303B11C248433004FF4CF /* Move.swift */,
@@ -127,6 +130,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				D31303B41C24AEDC004FF4CF /* BoardGraph.swift in Sources */,
 				D31303B21C248433004FF4CF /* Move.swift in Sources */,
 				D31303AE1C2481C4004FF4CF /* BoardNode.swift in Sources */,
 				D31303A71C1CDFDC004FF4CF /* main.swift in Sources */,

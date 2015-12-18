@@ -8,18 +8,6 @@
 
 import Foundation
 
-var nodeCount = 0
-func createGraph(node: BoardNode)
-{
-    node.generateMoves()
-    
-    for moveNode in node.moves
-    {
-        nodeCount++
-        createGraph(moveNode)
-    }
-}
-
 let data: [[BoardValue]] = [
     [.Empty, .Peg, .Peg, .Peg, .Peg],
     [.Peg, .Peg, .Peg, .Peg],
@@ -30,6 +18,11 @@ let data: [[BoardValue]] = [
 let board = Board(data: data)
 
 let rootNode = BoardNode(board: board, parent: nil, moveString: "")
-createGraph(rootNode)
 
-print("Graph Complete - \(nodeCount) nodes.")
+print("Generating graph...")
+
+let start = NSDate()
+let graph = BoardGraph(root: rootNode)
+let timeElapsed = NSDate().timeIntervalSinceDate(start)
+
+print("Graph Complete - \(graph.nodeCount) nodes in \(timeElapsed) seconds.")
