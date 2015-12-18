@@ -8,6 +8,16 @@
 
 import Foundation
 
+func time <A> (@noescape f: () -> A) -> A
+{
+    let startTime = NSDate()
+    let result = f()
+    let timeElapsed = NSDate().timeIntervalSinceDate(startTime)
+    
+    print("Time Elapsed - \(timeElapsed)")
+    return result
+}
+
 let data: [[BoardValue]] = [
     [.Empty, .Peg, .Peg, .Peg, .Peg],
     [.Peg, .Peg, .Peg, .Peg],
@@ -21,8 +31,6 @@ let rootNode = BoardNode(board: board, parent: nil, moveString: "")
 
 print("Generating graph...")
 
-let start = NSDate()
-let graph = BoardGraph(root: rootNode)
-let timeElapsed = NSDate().timeIntervalSinceDate(start)
+let graph = time { BoardGraph(root: rootNode) }
 
-print("Graph Complete - \(graph.nodeCount) nodes in \(timeElapsed) seconds.")
+print("Graph Complete - \(graph.nodeCount) nodes.")
