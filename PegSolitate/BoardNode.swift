@@ -24,7 +24,23 @@ class BoardNode
         self.moveString = moveString
     }
     
-    func newBoardNodeWithMove(move: Move) -> BoardNode
+    func generateMoves()
+    {
+        for space in board.emptySpaces
+        {
+            for dir in Direction.tri
+            {
+                let move = Move(location: space, direction: dir)
+                
+                if board.hasMove(move)
+                {
+                    moves.append(newBoardNodeWithMove(move))
+                }
+            }
+        }
+    }
+    
+    private func newBoardNodeWithMove(move: Move) -> BoardNode
     {
         var newBoard = board
         
@@ -43,21 +59,5 @@ class BoardNode
         newBoard.emptySpaces.append(oldPoint)
         
         return BoardNode(board: newBoard, parent: self, moveString: move.description)
-    }
-    
-    func generateMoves()
-    {
-        for space in board.emptySpaces
-        {
-            for dir in Direction.tri
-            {
-                let move = Move(location: space, direction: dir)
-                
-                if board.hasMove(move)
-                {
-                    moves.append(newBoardNodeWithMove(move))
-                }
-            }
-        }
     }
 }

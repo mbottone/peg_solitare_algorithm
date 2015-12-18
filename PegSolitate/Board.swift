@@ -21,25 +21,6 @@ struct Board
     var pegCount: Int
     var emptySpaces: [Point]
     
-    subscript(loc: Point) -> BoardValue {
-        get {
-            if loc.x < 0 || loc.y < 0 ||
-                loc.y >= data.count || loc.x >= data[loc.y].count
-            {
-                return .Invalid
-            }
-            return data[loc.y][loc.x]
-        }
-        set (newValue) {
-            data[loc.y][loc.x] = newValue
-        }
-    }
-    
-    func hasMove(move: Move) -> Bool
-    {
-        return self[move.firstStep] == .Peg && self[move.secondStep] == .Peg
-    }
-    
     init(data: [[BoardValue]])
     {
         self.data = data
@@ -62,5 +43,24 @@ struct Board
                 }
             }
         }
+    }
+    
+    subscript(loc: Point) -> BoardValue {
+        get {
+            if loc.x < 0 || loc.y < 0 ||
+                loc.y >= data.count || loc.x >= data[loc.y].count
+            {
+                return .Invalid
+            }
+            return data[loc.y][loc.x]
+        }
+        set (newValue) {
+            data[loc.y][loc.x] = newValue
+        }
+    }
+    
+    func hasMove(move: Move) -> Bool
+    {
+        return self[move.firstStep] == .Peg && self[move.secondStep] == .Peg
     }
 }
