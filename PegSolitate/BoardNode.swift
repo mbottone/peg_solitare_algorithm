@@ -30,7 +30,7 @@ class BoardNode
         {
             for dir in Direction.tri
             {
-                let move = Move(location: space, direction: dir)
+                let move = Move(loc: space, dir: dir)
                 
                 if board.hasMove(move)
                 {

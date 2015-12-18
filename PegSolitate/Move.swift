@@ -13,12 +13,16 @@ struct Move
     var location: Point
     var direction: Direction
     
-    var firstStep: Point {
-        return location.pointForDirection(direction)
-    }
+    var firstStep: Point
+    var secondStep: Point
     
-    var secondStep: Point {
-        return firstStep.pointForDirection(direction)
+    init(loc: Point, dir: Direction)
+    {
+        self.location = loc
+        self.direction = dir
+        
+        self.firstStep = loc.pointForDirection(dir)
+        self.secondStep = self.firstStep.pointForDirection(dir)
     }
     
     var description: String {
