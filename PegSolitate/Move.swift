@@ -76,10 +76,4 @@ struct Move
     var secondStep: Point {
         return firstStep.pointForDirection(direction)
     }
-    
-    init(loc: Point, dir: Direction)
-    {
-        self.location = loc
-        self.direction = dir
-    }
 }
