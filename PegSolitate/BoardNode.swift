@@ -12,9 +12,9 @@ class BoardNode
 {
     let board: Board
     let parent: BoardNode?
+    let moveString: String
     
     var moves: [BoardNode]
-    var moveString: String
     
     init(board: Board, parent: BoardNode?, moveString: String)
     {
