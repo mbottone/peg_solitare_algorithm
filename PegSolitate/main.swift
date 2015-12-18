@@ -8,49 +8,15 @@
 
 import Foundation
 
-func createGraph(node: BoardNode) -> Bool
+var nodeCount = 0
+func createGraph(node: BoardNode)
 {
-    let moves = node.generateMoves()
+    node.generateMoves()
     
-    for moveNode in moves
+    for moveNode in node.moves
     {
-        if createGraph(moveNode)
-        {
-            node.moves.append(moveNode)
-        }
-    }
-    
-    return (node.board.pegCount == 1 || node.moves.count != 0)
-}
-
-var outputString = "<root>\n"
-func generateOutputString(state: BoardNode, height: Int)
-{
-    if height != 0
-    {
-        for _ in 1...height
-        {
-            outputString += "   "
-        }
-        outputString += "<move>\(state.moveString)\n"
-    }
-    
-    for move in state.moves
-    {
-        generateOutputString(move, height: height + 1)
-    }
-    
-    if height != 0
-    {
-        for _ in 1...height
-        {
-            outputString += "   "
-        }
-        outputString += "</move>\n"
-    }
-    else
-    {
-        outputString += "</root>\n"
+        nodeCount++
+        createGraph(moveNode)
     }
 }
 
@@ -63,15 +29,7 @@ let data: [[BoardValue]] = [
 ]
 let board = Board(data: data)
 
-let startState = BoardNode(board: board, parent: nil, moveString: "")
-createGraph(startState)
-generateOutputString(startState, height: 0)
+let rootNode = BoardNode(board: board, parent: nil, moveString: "")
+createGraph(rootNode)
 
-do
-{
-    try outputString.writeToFile("output.xml", atomically: true, encoding: NSUTF8StringEncoding)
-}
-catch let error as NSError
-{
-    print("Error - \(error.description)")
-}
+print("Graph Complete - \(nodeCount) nodes.")

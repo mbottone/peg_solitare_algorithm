@@ -8,6 +8,24 @@
 
 import Foundation
 
+struct Move
+{
+    var location: Point
+    var direction: Direction
+    
+    var firstStep: Point {
+        return location.pointForDirection(direction)
+    }
+    
+    var secondStep: Point {
+        return firstStep.pointForDirection(direction)
+    }
+    
+    var description: String {
+        return "\(secondStep.toString()) -> \(location.toString())"
+    }
+}
+
 enum Direction
 {
     case N
@@ -61,23 +79,5 @@ struct Point
     func toString() -> String
     {
         return "(\(x), \(y))"
-    }
-}
-
-struct Move
-{
-    var location: Point
-    var direction: Direction
-    
-    var firstStep: Point {
-        return location.pointForDirection(direction)
-    }
-    
-    var secondStep: Point {
-        return firstStep.pointForDirection(direction)
-    }
-    
-    var description: String {
-        return "\(secondStep.toString()) -> \(location.toString())"
     }
 }

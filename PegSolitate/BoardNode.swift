@@ -11,8 +11,9 @@ import Foundation
 class BoardNode
 {
     let board: Board
-    var moves: [BoardNode]
     let parent: BoardNode?
+    
+    var moves: [BoardNode]
     var moveString: String
     
     init(board: Board, parent: BoardNode?, moveString: String)
@@ -35,16 +36,17 @@ class BoardNode
         newBoard[jumpPoint] = .Empty
         newBoard[oldPoint] = .Empty
         
-        var spaces = board.emptySpaces.filter {$0 != location}
-        spaces.append(jumpPoint)
-        spaces.append(oldPoint)
+        newBoard.pegCount--
+        
+        newBoard.emptySpaces = board.emptySpaces.filter {$0 != location}
+        newBoard.emptySpaces.append(jumpPoint)
+        newBoard.emptySpaces.append(oldPoint)
         
         return BoardNode(board: newBoard, parent: self, moveString: move.description)
     }
     
-    func generateMoves() -> [BoardNode]
+    func generateMoves()
     {
-        var nextMoves = [BoardNode]()
         for space in board.emptySpaces
         {
             for dir in Direction.tri
@@ -53,10 +55,9 @@ class BoardNode
                 
                 if board.hasMove(move)
                 {
-                    nextMoves.append(newBoardNodeWithMove(move))
+                    moves.append(newBoardNodeWithMove(move))
                 }
             }
         }
-        return nextMoves
     }
 }
