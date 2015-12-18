@@ -8,18 +8,16 @@
 
 import Foundation
 
-let board: [[BoardValue]] = [
+let data: [[BoardValue]] = [
     [.Empty, .Peg, .Peg, .Peg, .Peg],
     [.Peg, .Peg, .Peg, .Peg],
     [.Peg, .Peg, .Peg],
     [.Peg, .Peg],
     [.Peg],
 ]
+let board = Board(data: data)
 
-let emptySpaces = emptySpacesFromBoard(board)
-let pegCount = pegCountFromBoard(board)
-
-let startState = BoardNode(board: board, emptySpaces: emptySpaces, pegCount: pegCount, parent: nil, moveString: "")
+let startState = BoardNode(board: board, parent: nil, moveString: "")
 createGraph(startState)
 generateOutputString(startState, height: 0)
 

@@ -23,35 +23,39 @@ class BoardNode
         self.moveString = moveString
     }
     
-    func newBoardNodeWithMove(loc: Point, dir: Direction) -> BoardNode
+    func newBoardNodeWithMove(move: Move) -> BoardNode
     {
         var newBoard = board
-        let jumpPoint = loc.pointForDirection(dir)
-        let oldPoint = jumpPoint.pointForDirection(dir)
         
-        newBoard.data[loc.y][loc.x] = .Peg
-        newBoard.data[jumpPoint.y][jumpPoint.x] = .Empty
-        newBoard.data[oldPoint.y][oldPoint.x] = .Empty
+        let location = move.location
+        let jumpPoint = move.firstStep
+        let oldPoint = move.secondStep
         
-        var spaces = emptySpaces.filter {$0 != loc}
+        newBoard[location] = .Peg
+        newBoard[jumpPoint] = .Empty
+        newBoard[oldPoint] = .Empty
+        
+        var spaces = board.emptySpaces.filter {$0 != location}
         spaces.append(jumpPoint)
         spaces.append(oldPoint)
         
-        let move = "\(oldPoint.toString()) -> \(loc.toString())"
+        let moveDescription = "\(oldPoint.toString()) -> \(location.toString())"
         
-        return BoardNode(board: newBoard, parent: self, moveString: move)
+        return BoardNode(board: newBoard, parent: self, moveString: moveDescription)
     }
     
     func generateMoves() -> [BoardNode]
     {
         var nextMoves = [BoardNode]()
-        for space in emptySpaces
+        for space in board.emptySpaces
         {
             for dir in Direction.tri
             {
-                if board.hasMove(space, dir: dir)
+                let move = Move(loc: space, dir: dir)
+                
+                if board.hasMove(move)
                 {
-                    nextMoves.append(newBoardNodeWithMove(space, dir: dir))
+                    nextMoves.append(newBoardNodeWithMove(move))
                 }
             }
         }
@@ -59,19 +63,19 @@ class BoardNode
     }
 }
 
-func createGraph(state: BoardNode) -> Bool
+func createGraph(node: BoardNode) -> Bool
 {
-    let moves = state.generateMoves()
+    let moves = node.generateMoves()
     
-    for move in moves
+    for moveNode in moves
     {
-        if createGraph(move)
+        if createGraph(moveNode)
         {
-            state.moves.append(move)
+            node.moves.append(moveNode)
         }
     }
     
-    return (state.board.pegCount == 1 || state.moves.count != 0)
+    return (node.board.pegCount == 1 || node.moves.count != 0)
 }
 
 var outputString = "<root>\n"
