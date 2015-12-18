@@ -8,6 +8,8 @@
 
 /* Begin PBXBuildFile section */
 		D31303A71C1CDFDC004FF4CF /* main.swift in Sources */ = {isa = PBXBuildFile; fileRef = D31303A61C1CDFDC004FF4CF /* main.swift */; };
+		D31303AE1C2481C4004FF4CF /* BoardNode.swift in Sources */ = {isa = PBXBuildFile; fileRef = D31303AD1C2481C4004FF4CF /* BoardNode.swift */; settings = {ASSET_TAGS = (); }; };
+		D31303B01C24824B004FF4CF /* Board.swift in Sources */ = {isa = PBXBuildFile; fileRef = D31303AF1C24824B004FF4CF /* Board.swift */; settings = {ASSET_TAGS = (); }; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -25,6 +27,8 @@
 /* Begin PBXFileReference section */
 		D31303A31C1CDFDC004FF4CF /* PegSolitate */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = PegSolitate; sourceTree = BUILT_PRODUCTS_DIR; };
 		D31303A61C1CDFDC004FF4CF /* main.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = main.swift; sourceTree = "<group>"; };
+		D31303AD1C2481C4004FF4CF /* BoardNode.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BoardNode.swift; sourceTree = "<group>"; };
+		D31303AF1C24824B004FF4CF /* Board.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Board.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -58,6 +62,8 @@
 			isa = PBXGroup;
 			children = (
 				D31303A61C1CDFDC004FF4CF /* main.swift */,
+				D31303AF1C24824B004FF4CF /* Board.swift */,
+				D31303AD1C2481C4004FF4CF /* BoardNode.swift */,
 			);
 			path = PegSolitate;
 			sourceTree = "<group>";
@@ -118,7 +124,9 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				D31303AE1C2481C4004FF4CF /* BoardNode.swift in Sources */,
 				D31303A71C1CDFDC004FF4CF /* main.swift in Sources */,
+				D31303B01C24824B004FF4CF /* Board.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -236,6 +244,7 @@
 				D31303AC1C1CDFDC004FF4CF /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};
