@@ -17,7 +17,7 @@ enum BoardValue
 
 struct Board
 {
-    var data: [[BoardValue]]
+    private var data: [[BoardValue]]
     var pegCount: Int
     var emptySpaces: [Point]
     
@@ -27,19 +27,20 @@ struct Board
         self.emptySpaces = [Point]()
         self.pegCount = 0
         
-        for var yIndex = 0; yIndex < self.data.count; yIndex++
+        for (yIndex, row) in data.enumerate()
         {
-            for var xIndex = 0; xIndex < self.data[yIndex].count; xIndex++
+            for (xIndex, value) in row.enumerate()
             {
                 let p = Point(x: xIndex, y: yIndex)
                 
-                if self[p] == .Empty
+                switch value
                 {
+                case .Empty:
                     emptySpaces.append(p)
-                }
-                else if self[p] == .Peg
-                {
+                case .Peg:
                     pegCount++
+                case .Invalid:
+                    break
                 }
             }
         }

@@ -12,12 +12,13 @@ class BoardGraph
 {
     var root: BoardNode
     var nodeCount: Int
-    var outputString = "<root>\n"
+    var outputString: String
     
     init(root: BoardNode)
     {
         self.root = root
         self.nodeCount = 1
+        self.outputString = "<root>\n"
         
         createGraph(self.root, height: 0)
         
