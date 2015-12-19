@@ -8,7 +8,7 @@
 
 import Foundation
 
-func timeed <A> (@noescape f: () -> A) -> A
+func timed <A> (@noescape f: () -> A) -> A
 {
     let startTime = NSDate()
     let result = f()
@@ -32,7 +32,7 @@ rootNode.generateMoves()
 
 print("Generating graph...")
 
-let graph = timeed { BoardGraph(root: rootNode) }
+let graph = timed { BoardGraph(root: rootNode) }
 
 print("Graph Complete - \(graph.nodeCount) nodes")
 
