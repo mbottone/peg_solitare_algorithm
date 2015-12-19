@@ -14,13 +14,12 @@ class BoardNode
     let parent: BoardNode?
     let moveString: String
     
-    var moves: [BoardNode]
+    var moves: [BoardNode] = [BoardNode]()
     
     init(board: Board, parent: BoardNode? = nil, moveString: String = "")
     {
         self.board = board
         self.parent = parent
-        self.moves = [BoardNode]()
         self.moveString = moveString
     }
     
@@ -44,19 +43,15 @@ class BoardNode
     {
         var newBoard = board
         
-        let location = move.location
-        let jumpPoint = move.firstStep
-        let oldPoint = move.secondStep
-        
-        newBoard[location] = .Peg
-        newBoard[jumpPoint] = .Empty
-        newBoard[oldPoint] = .Empty
+        newBoard[move.end] = .Peg
+        newBoard[move.jump] = .Empty
+        newBoard[move.start] = .Empty
         
         newBoard.pegCount--
         
         newBoard.emptySpaces.removeAtIndex(emptyIndex)
-        newBoard.emptySpaces.append(jumpPoint)
-        newBoard.emptySpaces.append(oldPoint)
+        newBoard.emptySpaces.append(move.jump)
+        newBoard.emptySpaces.append(move.start)
         
         return BoardNode(board: newBoard, parent: self, moveString: move.description)
     }

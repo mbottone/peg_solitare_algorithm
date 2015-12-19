@@ -10,23 +10,19 @@ import Foundation
 
 struct Move
 {
-    var location: Point
-    var direction: Direction
-    
-    var firstStep: Point
-    var secondStep: Point
+    var start: Point
+    var jump: Point
+    var end: Point
     
     init(loc: Point, dir: Direction)
     {
-        self.location = loc
-        self.direction = dir
-        
-        self.firstStep = loc.pointForDirection(dir)
-        self.secondStep = self.firstStep.pointForDirection(dir)
+        end = loc
+        jump = loc.pointForDirection(dir)
+        start = jump.pointForDirection(dir)
     }
     
     var description: String {
-        return "\(secondStep.toString()) -> \(location.toString())"
+        return "\(start.toString()) -> \(end.toString())"
     }
 }
 

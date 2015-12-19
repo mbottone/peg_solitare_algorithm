@@ -11,14 +11,12 @@ import Foundation
 class BoardGraph
 {
     var root: BoardNode
-    var nodeCount: Int
-    var outputString: String
+    var nodeCount: Int = 1
+    var outputString: String = "<root>\n"
     
     init(root: BoardNode)
     {
         self.root = root
-        self.nodeCount = 1
-        self.outputString = "<root>\n"
         
         createGraph(self.root, height: 0)
         

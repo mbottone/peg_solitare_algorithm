@@ -24,8 +24,8 @@ struct Board
     init(data: [[BoardValue]])
     {
         self.data = data
-        self.emptySpaces = [Point]()
-        self.pegCount = 0
+        emptySpaces = [Point]()
+        pegCount = 0
         
         for (yIndex, row) in data.enumerate()
         {
@@ -62,6 +62,6 @@ struct Board
     
     func hasMove(move: Move) -> Bool
     {
-        return self[move.firstStep] == .Peg && self[move.secondStep] == .Peg
+        return self[move.start] == .Peg && self[move.jump] == .Peg
     }
 }
