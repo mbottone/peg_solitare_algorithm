@@ -8,7 +8,7 @@
 
 import Foundation
 
-func time <A> (@noescape f: () -> A) -> A
+func timeed <A> (@noescape f: () -> A) -> A
 {
     let startTime = NSDate()
     let result = f()
@@ -27,10 +27,20 @@ let data: [[BoardValue]] = [
 ]
 let board = Board(data: data)
 
-let rootNode = BoardNode(board: board, parent: nil, moveString: "")
+var rootNode = BoardNode(board: board, parent: nil, moveString: "")
+rootNode.generateMoves()
 
 print("Generating graph...")
 
-let graph = time { BoardGraph(root: rootNode) }
+let graph = timeed { BoardGraph(root: rootNode) }
 
 print("Graph Complete - \(graph.nodeCount) nodes")
+
+print("Writing to file...")
+
+do {
+    try graph.outputString.writeToFile("output.xml", atomically: true, encoding: NSUTF8StringEncoding)
+}
+catch let error as NSError {
+    print("Could not write to file - \(error.description)")
+}

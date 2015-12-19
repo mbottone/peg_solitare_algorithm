@@ -12,42 +12,38 @@ class BoardGraph
 {
     var root: BoardNode
     var nodeCount: Int
+    var outputString = "<root>\n"
     
     init(root: BoardNode)
     {
         self.root = root
         self.nodeCount = 1
         
-        createGraph(self.root)
+        createGraph(self.root, height: 0)
+        
+        outputString += "</root>\n"
     }
     
-    private func createGraph(node: BoardNode)
-    {
-        node.generateMoves()
-        
-        var finished = 0
-        for moveNode in node.moves
-        {
-            nodeCount++
-            
-            dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_BACKGROUND, 0)) {
-                self.parallelGraph(moveNode)
-                finished++
-            }
-            
-        }
-        
-        while finished != node.moves.count {}
-    }
-    
-    private func parallelGraph(node: BoardNode)
+    private func createGraph(node: BoardNode, height: Int)
     {
         node.generateMoves()
         
         for moveNode in node.moves
         {
             nodeCount++
-            parallelGraph(moveNode)
+            
+            outputString += getBuffer(height + 1)
+            outputString += "<move>\(moveNode.moveString)\n"
+            
+            createGraph(moveNode, height: height + 1)
+            
+            outputString += getBuffer(height + 1)
+            outputString += "</move>\n"
         }
+    }
+    
+    private func getBuffer(height: Int) -> String
+    {
+        return String(count: height, repeatedValue: Character("\t"))
     }
 }
