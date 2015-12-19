@@ -18,14 +18,12 @@ enum BoardValue
 struct Board
 {
     private var data: [[BoardValue]]
-    var pegCount: Int
-    var emptySpaces: [Point]
+    var pegCount: Int = 0
+    var emptySpaces: [Point] = [Point]()
     
     init(data: [[BoardValue]])
     {
         self.data = data
-        emptySpaces = [Point]()
-        pegCount = 0
         
         for (yIndex, row) in data.enumerate()
         {
