@@ -25,6 +25,18 @@ class BoardGraph
         outputString += "</root>\n"
     }
     
+    func writeToFile(filename: String)
+    {
+        do
+        {
+            try outputString.writeToFile(filename, atomically: true, encoding: NSUTF8StringEncoding)
+        }
+        catch let error as NSError
+        {
+            print("Could not write to file - \(error.description)")
+        }
+    }
+    
     private func createGraph(node: BoardNode, height: Int)
     {
         node.generateMoves()
@@ -33,18 +45,17 @@ class BoardGraph
         {
             nodeCount++
             
-            outputString += getBuffer(height + 1)
-            outputString += "<move>\(moveNode.moveString)\n"
+            let buffer = getBuffer(height + 1)
+            outputString += "\(buffer)<move>\(moveNode.moveString)\n"
             
             createGraph(moveNode, height: height + 1)
             
-            outputString += getBuffer(height + 1)
-            outputString += "</move>\n"
+            outputString += "\(buffer)</move>\n"
         }
     }
     
-    private func getBuffer(height: Int) -> String
+    private func getBuffer(count: Int) -> String
     {
-        return String(count: height, repeatedValue: Character("\t"))
+        return String(count: count, repeatedValue: Character("\t"))
     }
 }

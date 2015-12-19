@@ -16,7 +16,7 @@ class BoardNode
     
     var moves: [BoardNode]
     
-    init(board: Board, parent: BoardNode?, moveString: String)
+    init(board: Board, parent: BoardNode? = nil, moveString: String = "")
     {
         self.board = board
         self.parent = parent

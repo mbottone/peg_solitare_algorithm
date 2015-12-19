@@ -8,39 +8,18 @@
 
 import Foundation
 
-func timed <A> (@noescape f: () -> A) -> A
-{
-    let startTime = NSDate()
-    let result = f()
-    let timeElapsed = NSDate().timeIntervalSinceDate(startTime)
-    
-    print("Time Elapsed - \(timeElapsed) seconds")
-    return result
-}
-
-let data: [[BoardValue]] = [
+let board = Board(data: [
     [.Empty, .Peg, .Peg, .Peg, .Peg],
     [.Peg, .Peg, .Peg, .Peg],
     [.Peg, .Peg, .Peg],
     [.Peg, .Peg],
     [.Peg],
-]
-let board = Board(data: data)
-
-var rootNode = BoardNode(board: board, parent: nil, moveString: "")
-rootNode.generateMoves()
+    ])
 
 print("Generating graph...")
 
-let graph = timed { BoardGraph(root: rootNode) }
+let rootNode = BoardNode(board: board)
+let graph = BoardGraph(root: rootNode)
+graph.writeToFile("output.xml")
 
-print("Graph Complete - \(graph.nodeCount) nodes")
-
-print("Writing to file...")
-
-do {
-    try graph.outputString.writeToFile("output.xml", atomically: true, encoding: NSUTF8StringEncoding)
-}
-catch let error as NSError {
-    print("Could not write to file - \(error.description)")
-}
+print("Done!")
