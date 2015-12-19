@@ -25,10 +25,29 @@ class BoardGraph
     {
         node.generateMoves()
         
+        var finished = 0
         for moveNode in node.moves
         {
             nodeCount++
-            createGraph(moveNode)
+            
+            dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_BACKGROUND, 0)) {
+                self.parallelGraph(moveNode)
+                finished++
+            }
+            
+        }
+        
+        while finished != node.moves.count {}
+    }
+    
+    private func parallelGraph(node: BoardNode)
+    {
+        node.generateMoves()
+        
+        for moveNode in node.moves
+        {
+            nodeCount++
+            parallelGraph(moveNode)
         }
     }
 }

@@ -26,7 +26,7 @@ class BoardNode
     
     func generateMoves()
     {
-        for space in board.emptySpaces
+        for (i, space) in board.emptySpaces.enumerate()
         {
             for dir in Direction.tri
             {
@@ -34,13 +34,13 @@ class BoardNode
                 
                 if board.hasMove(move)
                 {
-                    moves.append(newBoardNodeWithMove(move))
+                    moves.append(newBoardNodeWithMove(move, removeIndex: i))
                 }
             }
         }
     }
     
-    private func newBoardNodeWithMove(move: Move) -> BoardNode
+    private func newBoardNodeWithMove(move: Move, removeIndex: Int) -> BoardNode
     {
         var newBoard = board
         
@@ -54,7 +54,7 @@ class BoardNode
         
         newBoard.pegCount--
         
-        newBoard.emptySpaces = board.emptySpaces.filter {$0 != location}
+        newBoard.emptySpaces.removeAtIndex(removeIndex)
         newBoard.emptySpaces.append(jumpPoint)
         newBoard.emptySpaces.append(oldPoint)
         
